@@ -1,0 +1,70 @@
+{
+  "pluginAlias": "homebridge-http-temperature-automation",
+  "pluginType": "platform",
+  "singular": true,
+  "headerDisplay": "TP-Link Smart Home Plugin.<p>Most users do not require configuration and can just click \"Save\" to get started. See [README](https://github.com/plasticrake/homebridge-tplink-smarthome/blob/master/README.md) for more information.</p>",
+  "footerDisplay": "",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "Homebridge HTTP temperature automation",
+        "minLength": 1,
+        "required": true
+      },
+      "minTemperatureThreshold": {
+        "title": "Minimum Temperature Threshold",
+        "type": "number",
+        "description": "Threshold that fires the detector at and under this value",
+        "placeholder": "0",
+        "minimum": -50,
+        "maximum": 50
+      },
+      "maxTemperatureThreshold": {
+        "title": "Maximum Temperature Threshold",
+        "type": "number",
+        "description": "Threshold that fires the detector at and over this value",
+        "placeholder": "0",
+        "minimum": -50,
+        "maximum": 50
+      },
+      "openWeatherMapApiKey": {
+        "title": "API key of your OpenWeatherMap.org account",
+        "type": "string",
+        "description": "API key can be get at https://home.openweathermap.org/users/sign_up",
+        "placeholder": "0"
+      },
+      "openWeatherMapCityID": {
+        "title": "ID of your city",
+        "type": "number",
+        "description": "CityIDs can be found at http://bulk.openweathermap.org/sample/city.list.json.gz",
+        "placeholder": "0",
+        "required": true      
+      },
+      "updateInterval": {
+        "title": "Interval between each temperature updates (sec)",
+        "type": "integer",
+        "description": "Do not update too often to make sure that you dont over use your subscription",
+        "default": 300,
+        "minimum": 10,
+        "maximum": 3600,
+        "required": true      
+      },
+      "temperatureUnit": {
+        "title": "Unit of mesure",
+        "type": "string",
+        "description": "",
+        "default": "metric",
+        "minimum": 10,
+        "maximum": 3600,
+        "required": true,
+        "enum": [
+          "metric",
+          "imperial"
+        ]  
+      }
+    }
+  }
+}
