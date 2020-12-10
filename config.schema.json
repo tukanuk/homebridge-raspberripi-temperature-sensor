@@ -1,8 +1,8 @@
 {
-  "pluginAlias": "homebridge_temperature_sensor_platform",
+  "pluginAlias": "homebridge-temperature-sensor-platform",
   "pluginType": "platform",
   "singular": true,
-  "headerDisplay": "TP-Link Smart Home Plugin.<p>Most users do not require configuration and can just click \"Save\" to get started. See [README](https://github.com/plasticrake/homebridge-tplink-smarthome/blob/master/README.md) for more information.</p>",
+  "headerDisplay": "RaspberryPi Smart Home Plugin.<p>Most users do not require configuration and can just click \"Save\" to get started. See [README](https://github.com/plasticrake/homebridge-tplink-smarthome/blob/master/README.md) for more information.</p>",
   "footerDisplay": "",
   "schema": {
     "type": "object",
@@ -10,7 +10,7 @@
       "name": {
         "title": "Name",
         "type": "string",
-        "default": "Homebridge HTTP temperature automation",
+        "default": "RaspberryPi Temperature Sensor",
         "minLength": 1,
         "required": true
       },

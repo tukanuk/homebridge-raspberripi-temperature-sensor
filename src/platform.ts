@@ -56,7 +56,7 @@ export class HTTPTempHomebridgePlatform implements DynamicPlatformPlugin {
     // or a user-defined array in the platform config.
     const devices = [
       {
-        uniqueId: '0c98a804-1025-11eb-adc1-0242ac120002',
+        uniqueId: '0c98a804-1025-11eb-adc1-0242ac120003',
         displayName: 'Temperature',
       },
       // {

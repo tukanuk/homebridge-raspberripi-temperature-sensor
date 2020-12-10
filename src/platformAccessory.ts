@@ -15,7 +15,7 @@ export class HTTPTempPlatformAccessory {
   private service: Service;
 
   private accessoryStates = {
-    Temperature: 37.5,
+    Temperature: 99.9,
   };
 
   constructor(
@@ -25,20 +25,39 @@ export class HTTPTempPlatformAccessory {
 
     // set accessory information
     this.accessory.getService(this.platform.Service.AccessoryInformation)!
-      .setCharacteristic(this.platform.Characteristic.Manufacturer, 'Agrosoft')
-      .setCharacteristic(this.platform.Characteristic.Model, 'AS-HTTPTemp-V1')
-      .setCharacteristic(this.platform.Characteristic.SerialNumber, '000003421');
-
+    .setCharacteristic(this.platform.Characteristic.Manufacturer, 'Tukanuk')
+    .setCharacteristic(this.platform.Characteristic.Model, 'AS-HTTPTemp-V1')
+    .setCharacteristic(this.platform.Characteristic.SerialNumber, '000003422');
+    
     // get the TemperatureSensor service if it exists, otherwise create a new TemperatureSensor service
     this.service = this.accessory.getService(this.platform.Service.TemperatureSensor) || 
-                    this.accessory.addService(this.platform.Service.TemperatureSensor);
+    this.accessory.addService(this.platform.Service.TemperatureSensor);
+    
+    // set the service name, this is what is displayed as the default name on the Home app
+    this.service.setCharacteristic(this.platform.Characteristic.Name, accessory.context.device.displayName);
+    
+    // register handlers for the CurrentTemperature Characteristic
+    this.service.getCharacteristic(this.platform.Characteristic.CurrentTemperature)
+    .on('get', this.getTemperature.bind(this));
+    
+    
+    // set accessory information
+    // first attempt at adding humidty sensor
+      this.accessory.getService(this.platform.Service.AccessoryInformation)!
+      .setCharacteristic(this.platform.Characteristic.Manufacturer, 'Tukanuk')
+      .setCharacteristic(this.platform.Characteristic.Model, 'Humidty-V1')
+      .setCharacteristic(this.platform.Characteristic.SerialNumber, '000003433');
+
+    // get the TemperatureSensor service if it exists, otherwise create a new TemperatureSensor service
+    this.service = this.accessory.getService(this.platform.Service.HumiditySensor) || 
+                    this.accessory.addService(this.platform.Service.HumiditySensor);
 
     // set the service name, this is what is displayed as the default name on the Home app
     this.service.setCharacteristic(this.platform.Characteristic.Name, accessory.context.device.displayName);
 
     // register handlers for the CurrentTemperature Characteristic
-    this.service.getCharacteristic(this.platform.Characteristic.CurrentTemperature)
-      .on('get', this.getTemperature.bind(this));
+    this.service.getCharacteristic(this.platform.Characteristic.CurrentRelativeHumidity)
+      .on('get', this.getHumidity.bind(this));
 
     /**
      * Creating multiple services of the same type.
@@ -46,10 +65,10 @@ export class HTTPTempPlatformAccessory {
 
     // Add two "motion sensor" services to the accessory that will trigger when min or max threshold is exceeded
     const motionSensorOneService = this.accessory.getService('Min Temperature Exceeded') ||
-      this.accessory.addService(this.platform.Service.MotionSensor, 'Min Temperature Exceeded', '029ca001-8c05-4734-bbdf-5ee0ae5d9fa3');
+      this.accessory.addService(this.platform.Service.MotionSensor, 'Min Temperature Exceeded', '029ca001-8c05-4734-bbdf-5ee0ae5d9fa4');
 
     const motionSensorTwoService = this.accessory.getService('Max Temperature Exceeded') ||
-      this.accessory.addService(this.platform.Service.MotionSensor, 'Max Temperature Exceeded', 'c6bd9d19-159f-4011-aa63-6f953c4c3755');
+      this.accessory.addService(this.platform.Service.MotionSensor, 'Max Temperature Exceeded', 'c6bd9d19-159f-4011-aa63-6f953c4c3756');
 
     /**
      * Updating characteristics values asynchronously.
@@ -93,35 +112,50 @@ export class HTTPTempPlatformAccessory {
    * 
    */
   getTemperature(callback: CharacteristicGetCallback) {
-    const openWeatherMapApiKey = (this.platform.config.openWeatherMapApiKey as string);
+    // const openWeatherMapApiKey = (this.platform.config.openWeatherMapApiKey as string);
 
-    const openWeather = new OpenWeatherMap({
-      apiKey: openWeatherMapApiKey,
-    });
+    // const openWeather = new OpenWeatherMap({
+    //   apiKey: openWeatherMapApiKey,
+    // });
 
-    if((this.platform.config.temperatureUnit as string) === 'imperial'){
-      openWeather.setUnits('imperial');
-    } else{
-      openWeather.setUnits('metric');
-    }
+    // if((this.platform.config.temperatureUnit as string) === 'imperial'){
+    //   openWeather.setUnits('imperial');
+    // } else{
+    //   openWeather.setUnits('metric');
+    // }
 
-    // Get the current temperature value from openwethermap.org
-    openWeather
-      .getCurrentWeatherByCityId((this.platform.config.openWeatherMapCityID as number))
-      .then((weather) => {
-        this.accessoryStates.Temperature = weather.main.temp;
-        this.platform.log.info('Get Characteristic Current Temperature ->', weather.main.temp + ' (' + weather.name +')');
-      })
-      .catch((error) => this.platform.log.error('Error is ', error));
-
-  
-    const temperature = this.accessoryStates.Temperature ;
-
-    this.platform.log.debug('Get Characteristic Current Temperature ->', temperature);
-
+    // // Get the current temperature value from openwethermap.org
+    // openWeather
+    //   .getCurrentWeatherByCityId((this.platform.config.openWeatherMapCityID as number))
+    //   .then((weather) => {
+    //     this.accessoryStates.Temperature = weather.main.temp;
+    //     this.platform.log.info('Get Characteristic Current Temperature ->', weather.main.temp + ' (' + weather.name +')');
+    //   })
+    //   .catch((error) => this.platform.log.error('Error is ', error));
+    
+    
+    // const temperature = this.accessoryStates.Temperature ;
+    
+    // this.platform.log.debug('Get Characteristic Current Temperature ->', temperature);
+    
+    const temperature = 66.6 ;
+    this.platform.log.info('Get RaspPi Temperature ->', temperature);
+    
     // you must call the callback function
     // the first argument should be null if there were no errors
     // the second argument should be the value to return
     callback(null, temperature);
+  }
+  
+  // TODO: get humidity
+  getHumidity(callback: CharacteristicGetCallback) {
+    
+    const humidity = 50.0 ;
+    this.platform.log.info('Get RaspPi Humidity ->', humidity);
+
+    // you must call the callback function
+    // the first argument should be null if there were no errors
+    // the second argument should be the value to return
+    callback(null, humidity);
   }
 }

@@ -1,9 +1,9 @@
 /**
  * This is the name of the platform that users will use to register the plugin in the Homebridge config.json
  */
-export const PLATFORM_NAME = 'homebridge_temperature_sensor_platform';
+export const PLATFORM_NAME = 'homebridge-temperature-sensor-platform';
 
 /**
  * This must match the name of your plugin as defined the package.json
  */
-export const PLUGIN_NAME = 'homebridge_temperature_sensor';
+export const PLUGIN_NAME = 'homebridge-temperature-sensor';
