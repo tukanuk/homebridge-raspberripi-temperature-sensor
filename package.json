@@ -1,16 +1,16 @@
 {
-  "private": false,
-  "displayName": "HTTP Temperature for automation",
-  "name": "homebridge-http-temperature-automation",
-  "version": "1.0.0",
-  "description": "Gets temperature from openweathermap.org and provides min and max sensors",
+  "private": true,
+  "displayName": "RaspberryPi Temperature Sensor",
+  "name": "homebridge_temperature_sensor",
+  "version": "0.1.0",
+  "description": "Gets temperature from RaspberryPi sensor and provides min and max sensors",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/lunettepaysano/homebridge-http-temperature-automation.git"
+    "url": "https://github.com/tukanuk/homebridge_temperature_sensor"
   },
   "bugs": {
-    "url": "https://github.com/lunettepaysano/homebridge-http-temperature-automation/issues"
+    "url": "https://github.com/tukanuk/homebridge_temperature_sensor/issues"
   },
   "engines": {
     "node": ">=10.17.0",

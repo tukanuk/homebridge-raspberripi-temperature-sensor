@@ -1,5 +1,5 @@
 {
-  "pluginAlias": "homebridge-http-temperature-automation",
+  "pluginAlias": "homebridge_temperature_sensor_platform",
   "pluginType": "platform",
   "singular": true,
   "headerDisplay": "TP-Link Smart Home Plugin.<p>Most users do not require configuration and can just click \"Save\" to get started. See [README](https://github.com/plasticrake/homebridge-tplink-smarthome/blob/master/README.md) for more information.</p>",
@@ -41,7 +41,7 @@
         "type": "number",
         "description": "CityIDs can be found at http://bulk.openweathermap.org/sample/city.list.json.gz",
         "placeholder": "0",
-        "required": true      
+        "required": true
       },
       "updateInterval": {
         "title": "Interval between each temperature updates (sec)",
@@ -50,7 +50,7 @@
         "default": 300,
         "minimum": 10,
         "maximum": 3600,
-        "required": true      
+        "required": true
       },
       "temperatureUnit": {
         "title": "Unit of mesure",
@@ -60,10 +60,7 @@
         "minimum": 10,
         "maximum": 3600,
         "required": true,
-        "enum": [
-          "metric",
-          "imperial"
-        ]  
+        "enum": ["metric", "imperial"]
       }
     }
   }
