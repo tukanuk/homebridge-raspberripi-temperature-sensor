@@ -57,7 +57,7 @@ export class HTTPTempHomebridgePlatform implements DynamicPlatformPlugin {
     const devices = [
       {
         uniqueId: '0c98a804-1025-11eb-adc1-0242ac120003',
-        displayName: 'Temperature',
+        displayName: 'RaspberryPi Sensor',
       },
       // {
       //   exampleUniqueId: 'EFGH',

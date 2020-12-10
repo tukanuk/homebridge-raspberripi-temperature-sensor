@@ -45,10 +45,10 @@ export class HTTPTempPlatformAccessory {
     // first attempt at adding humidty sensor
       this.accessory.getService(this.platform.Service.AccessoryInformation)!
       .setCharacteristic(this.platform.Characteristic.Manufacturer, 'Tukanuk')
-      .setCharacteristic(this.platform.Characteristic.Model, 'Humidty-V1')
+      .setCharacteristic(this.platform.Characteristic.Model, 'Humidity-V1')
       .setCharacteristic(this.platform.Characteristic.SerialNumber, '000003433');
 
-    // get the TemperatureSensor service if it exists, otherwise create a new TemperatureSensor service
+    // get the HumiditySensor service if it exists, otherwise create a new HumiditySensor service
     this.service = this.accessory.getService(this.platform.Service.HumiditySensor) || 
                     this.accessory.addService(this.platform.Service.HumiditySensor);
 
